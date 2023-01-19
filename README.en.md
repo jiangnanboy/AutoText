@@ -14,9 +14,9 @@ The main functions of this project include text error correction, picture ocr an
 
 **Guide**
 
-- [Text Error Correction](#Text Error Correction)
+- [Text-Error-Correction](#Text-Error-Correction)
 - [ocr](#ocr)
-- [Table Structure Recognition](#Table Structure Recognition)
+- [Table-Structure-Recognition](#Table-Structure-Recognition)
 - [Todo](#Todo)
 - [Contact](#Contact)
 - [Citation](#Citation)
@@ -24,7 +24,7 @@ The main functions of this project include text error correction, picture ocr an
 - [Contribute](#Contribute)
 - [Reference](#reference)
 
-## Text Error Correction
+## Text-Error-Correction
 
 - The text error correction section is detailed here [jcorrector](https://github.com/jiangnanboy/jcorrector)
 - This project mainly includes error correction based on ngram, error correction based on deep learning, error correction based on template Chinese grammar and error correction based on idiom、proper name, etc
@@ -84,7 +84,7 @@ The main functions of this project include text error correction, picture ocr an
 </p>
 <br/><br/>
 
-## Table Structure Recognition
+## Table-Structure-Recognition
 - Developed by opencv based on rules, the main table types identified are: bounded table, unbounded table and partially bounded table
 - See the examples/ocr/text/TableDemo section of this project for specific use
 - Usage
