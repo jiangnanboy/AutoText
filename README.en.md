@@ -165,7 +165,7 @@ The main functions of this project include text error correction, picture ocr an
 
 ## Contact
 
-1、Tithub：https://github.com/jiangnanboy
+1、Github：https://github.com/jiangnanboy
 
 2、Blog：https://www.cnblogs.com/little-horse/
 
