@@ -158,6 +158,7 @@
 - [x] 加入jcorrector文本纠错，修改部分程序
 - [x] 基于paddleocr模型，利用java实现图片ocr
 - [x] 基于规则利用opencv识别表格结构
+
 ...
 
 ## Contact
