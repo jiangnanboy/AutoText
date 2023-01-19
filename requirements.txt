@@ -1,0 +1,10 @@
+jav11+
+nd4j
+hanlp
+pinyin4j
+fastjson2
+onnxruntime
+djl
+javacv-platform
+javacpp
+openblas
