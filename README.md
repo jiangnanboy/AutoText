@@ -174,7 +174,7 @@
 如果你在研究中使用了AutoText，请按如下格式引用：
 
 ```latex
-@{jcorrector,
+@{AutoText,
   author = {Shi Yan},
   title = {AutoText: Text automatic processing tool},
   year = {2023},
