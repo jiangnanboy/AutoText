@@ -1,7 +1,7 @@
 package utils.correct;
 
 /**
- * @author YanShi
+ * @author sy
  * @date 2022/12/14 20:01
  */
 public class NormalizedLevenshtein {
