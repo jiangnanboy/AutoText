@@ -176,7 +176,7 @@ The main functions of this project include text error correction, picture ocr an
 If you used AutoText in your research, reference it in the following format:
 
 ```latex
-@{jcorrector,
+@{AutoText,
   author = {Shi Yan},
   title = {AutoText: Text automatic processing tool},
   year = {2023},
