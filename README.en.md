@@ -22,7 +22,6 @@ The main functions of this project include text error correction, picture ocr an
 - [Citation](#Citation)
 - [License](#License)
 - [Contribute](#Contribute)
-- [Reference](#reference)
 
 ## Text-Error-Correction
 
@@ -192,16 +191,3 @@ If you used AutoText in your research, reference it in the following format:
 
 Interested friends are welcome to fork and submit PR.
 
-## Reference
-* https://github.com/jiangnanboy/jcorrector
-* https://github.com/PaddlePaddle/PaddleOCR
-* https://github.com/bytedeco/javacv
-* https://github.com/deepjavalibrary/djl
-* https://github.com/PaddlePaddle/Paddle
-* https://github.com/microsoft/onnxruntime
-* https://github.com/mymagicpower/AIAS
-* https://github.com/jiangnanboy/java-springboot-paddleocr-v2
-* https://github.com/jiangnanboy/java-springboot-paddleocr
-* https://github.com/jiangnanboy/model2onnx
-* https://github.com/jiangnanboy/macbert-java-onnx
-* https://github.com/jiangnanboy/onnx-java
