@@ -20,7 +20,6 @@
 - [Citation](#Citation)
 - [License](#License)
 - [Contribute](#Contribute)
-- [Reference](#reference)
 
 ## 文本纠错
 
@@ -190,16 +189,3 @@ AutoText 的授权协议为 **Apache License 2.0**，可免费用做商业用途
 
 欢迎有兴趣的朋友fork，提交PR。
 
-## Reference
-* https://github.com/jiangnanboy/jcorrector
-* https://github.com/PaddlePaddle/PaddleOCR
-* https://github.com/bytedeco/javacv
-* https://github.com/deepjavalibrary/djl
-* https://github.com/PaddlePaddle/Paddle
-* https://github.com/microsoft/onnxruntime
-* https://github.com/mymagicpower/AIAS
-* https://github.com/jiangnanboy/java-springboot-paddleocr-v2
-* https://github.com/jiangnanboy/java-springboot-paddleocr
-* https://github.com/jiangnanboy/model2onnx
-* https://github.com/jiangnanboy/macbert-java-onnx
-* https://github.com/jiangnanboy/onnx-java
