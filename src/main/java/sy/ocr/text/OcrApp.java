@@ -11,6 +11,7 @@ import ai.djl.repository.zoo.ZooModel;
 import ai.djl.translate.TranslateException;
 import sy.ocr.text.detection.OcrDetection;
 import sy.ocr.text.recognition.OcrRecognition;
+import utils.common.PropertiesReader;
 import utils.engine.EngineConstant;
 import utils.image.ImageUtils;
 import utils.image.TextListBox;
@@ -42,20 +43,69 @@ public class OcrApp {
     private OcrRecognition recognition;
     private String engineType;
 
+    public OcrApp() {
+        if(Optional.ofNullable(this.detectionModelPath).isEmpty() || Optional.ofNullable(this.recognitionModelPath).isEmpty()
+                || Optional.ofNullable(this.engineType).isEmpty()) {
+            this.defaultInit();
+        }
+    }
+
+    public OcrApp(String detectionModelFile, String recognitionModelFile) {
+        this(Paths.get(detectionModelFile), Paths.get(recognitionModelFile));
+    }
+
+    public OcrApp(String detectionModelFile, String recognitionModelFile, String engineType) {
+        this(Paths.get(detectionModelFile), Paths.get(recognitionModelFile), engineType);
+    }
+
     public OcrApp(Path detectionModelPath, Path recognitionModelPath) {
         this(detectionModelPath, recognitionModelPath, EngineConstant.ENGINE_ONNX);
     }
 
-    public OcrApp(Path detectionModelPath, Path recognitionModelPath, String engienType) {
+    public OcrApp(Path detectionModelPath, Path recognitionModelPath, String engineType) {
         this.detectionModelPath = detectionModelPath;
         this.recognitionModelPath = recognitionModelPath;
-        this.engineType = engienType;
+        this.engineType = engineType;
     }
 
     /**
      * init ocr model
      */
     public void init() {
+        if(Optional.ofNullable(this.detectionModelPath).isEmpty() || Optional.ofNullable(this.recognitionModelPath).isEmpty()
+                || Optional.ofNullable(this.engineType).isEmpty()) {
+            this.detection = new OcrDetection();
+            this.recognition = new OcrRecognition();
+            try {
+                this.detectionModel = ModelZoo.loadModel(this.detection.detectCriteria(this.detectionModelPath, this.engineType));
+                this.detector = this.detectionModel.newPredictor();
+                this.recognitionModel = ModelZoo.loadModel(this.recognition.recognizeCriteria(this.recognitionModelPath, this.engineType));
+                this.recognizer = this.recognitionModel.newPredictor();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ModelNotFoundException e) {
+                e.printStackTrace();
+            } catch (MalformedModelException e) {
+                e.printStackTrace();
+            }
+            LOGGER.info("Init ocr model done!");
+        } else {
+            LOGGER.info("Ocr model already exists! Does not need to be initialized!");
+        }
+    }
+
+    /**
+     * default init ocr model
+     */
+    private void defaultInit() {
+        String detectionModelFile = OcrApp.class.getClassLoader().getResource(PropertiesReader.get("text_recog_det_model_path")).getPath().replaceFirst("/", "");
+        String recognitionModelFile = OcrApp.class.getClassLoader().getResource(PropertiesReader.get("text_recog_rec_model_path")).getPath().replaceFirst("/", "");
+        Path detectionModelPath = Paths.get(detectionModelFile);
+        Path recognitionModelPath = Paths.get(recognitionModelFile);
+        this.detectionModelPath = detectionModelPath;
+        this.recognitionModelPath = recognitionModelPath;
+        this.engineType = EngineConstant.ENGINE_ONNX;
+
         this.detection = new OcrDetection();
         this.recognition = new OcrRecognition();
         try {
