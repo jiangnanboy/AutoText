@@ -24,8 +24,12 @@
 ## 文本纠错
 
 - 文本纠错部分详细见[jcorrector](https://github.com/jiangnanboy/jcorrector)
-- 本项目主要有基于ngram的纠错、基于深度学习的纠错、基于模板中文语法纠错以及成语、专名纠错等
-- 具体使用见本项目中的examples/correct部分
+- 本项目目前主要包括：
+    - 基于ngram的纠错
+    - 基于深度学习的纠错
+    - 基于模板中文语法纠错
+    - 成语、专名纠错
+- 具体使用见本项目中的examples/correct部分，或者[jcorrector](https://github.com/jiangnanboy/jcorrector)
 
 ## 图片ocr
 - 这部分主要利用[paddleocr](https://github.com/PaddlePaddle/PaddleOCR) 中的检测与识别部分，并将其中模型转为onnx格式进行调用，本项目在识别前对图片进行了预处理，使得在cpu环境下，平均一张图10秒左右。
