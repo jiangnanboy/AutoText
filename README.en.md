@@ -26,7 +26,11 @@ The main functions of this project include text error correction, picture ocr an
 ## Text-Error-Correction
 
 - The text error correction section is detailed here [jcorrector](https://github.com/jiangnanboy/jcorrector)
-- This project mainly includes error correction based on ngram, error correction based on deep learning, error correction based on template Chinese grammar and error correction based on idiom、proper name, etc
+- This project mainly includes:
+    - error correction based on ngram
+    - error correction based on deep learning
+    - error correction based on template Chinese grammar 
+    - error correction based on idiom、proper name
 - See the examples/correct section of this project for specific use
 
 ## ocr
