@@ -26,27 +26,27 @@ public class TableDemo {
         String imagePath = "D:\\project\\idea_workspace\\AutoText\\src\\main\\java\\examples\\ocr\\img_test\\bordered_example.png";
         Mat imageMat = imread(imagePath);
         System.out.println("imageMat : " + imageMat.size().height() + " " + imageMat.size().width() + " ");
-        Pair< List<List<List<Integer>>>, Mat> pair = BorderedRecog.recognizeStructure(imageMat);
-        System.out.println(pair.getLeft());
-        ImageUtils.imshow("Image", pair.getRight());
+        List<List<List<Integer>>> resultList = BorderedRecog.recognizeStructure(imageMat);
+        System.out.println(resultList);
+//        ImageUtils.imshow("Image", pair.getRight());
     }
 
     public static void unBorderedRecog() {
         String imagePath = "D:\\project\\idea_workspace\\AutoText\\src\\main\\java\\examples\\ocr\\img_test\\unbordered_example.jpg";
         Mat imageMat = imread(imagePath);
         System.out.println("imageMat : " + imageMat.size().height() + " " + imageMat.size().width() + " ");
-        Pair< List<List<List<Integer>>>, Mat> pair = UnBorderedRecog.recognizeStructure(imageMat);
-        System.out.println(pair.getLeft());
-        ImageUtils.imshow("Image", pair.getRight());
+        List<List<List<Integer>>> resultList = UnBorderedRecog.recognizeStructure(imageMat);
+        System.out.println(resultList);
+//        ImageUtils.imshow("Image", pair.getRight());
     }
 
     public static void partiallyBorderedRecog() {
         String imagePath = "D:\\project\\idea_workspace\\AutoText\\src\\main\\java\\examples\\ocr\\img_test\\partially_example.jpg";
         Mat imageMat = imread(imagePath);
         System.out.println("imageMat : " + imageMat.size().height() + " " + imageMat.size().width() + " ");
-        Pair< List<List<List<Integer>>>, Mat> pair = PartiallyBorderedRecog.recognizeStructure(imageMat);
-        System.out.println(pair.getLeft());
-        ImageUtils.imshow("Image", pair.getRight());
+        List<List<List<Integer>>> resultList = PartiallyBorderedRecog.recognizeStructure(imageMat);
+        System.out.println(resultList);
+//        ImageUtils.imshow("Image", pair.getRight());
     }
 
 
