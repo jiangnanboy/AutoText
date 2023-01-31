@@ -25,7 +25,7 @@ public class PartiallyBorderedRecog {
      * @param mat
      * @return
      */
-    public static Pair< List<List<List<Integer>>>, Mat> recognizeStructure(Mat mat) {
+    public static List<List<List<Integer>>> recognizeStructure(Mat mat) {
         // Create binary image from source image
         opencv_imgproc.cvtColor(mat, mat, opencv_imgproc.COLOR_BGR2GRAY);
 //        threshold(bw, bw, 40, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
@@ -196,7 +196,7 @@ public class PartiallyBorderedRecog {
             }
             finalBoxes.add(list);
         }
-        return Pair.of(finalBoxes, mat);
+        return finalBoxes;
     }
 
 }
