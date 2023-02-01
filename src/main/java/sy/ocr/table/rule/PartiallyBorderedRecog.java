@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static org.bytedeco.opencv.global.opencv_imgcodecs.imread;
 import static sy.ocr.table.rule.util.sortContours;
 
 /**
@@ -19,6 +20,9 @@ import static sy.ocr.table.rule.util.sortContours;
  * @date 2023/1/17 23:52
  */
 public class PartiallyBorderedRecog {
+    public static List<List<List<Integer>>> recognizeStructure(String imagePath) {
+        return recognizeStructure(imread(imagePath));
+    }
 
     /**
      * recognize structure
@@ -194,6 +198,7 @@ public class PartiallyBorderedRecog {
                 int minimumIndex = diffList.indexOf(minimum);
                 list.add(minimumIndex, rowList.get(rowIndex).get(j));
             }
+            list = list.stream().filter(lst -> lst.size() != 0).collect(Collectors.toList());
             finalBoxes.add(list);
         }
         return finalBoxes;
