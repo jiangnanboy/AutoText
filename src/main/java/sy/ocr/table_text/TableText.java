@@ -3,8 +3,6 @@ package sy.ocr.table_text;
 import ai.djl.modality.cv.Image;
 import ai.djl.modality.cv.ImageFactory;
 import ai.djl.translate.TranslateException;
-import org.bytedeco.javacpp.indexer.ByteIndexer;
-import org.bytedeco.opencv.global.opencv_core;
 import org.bytedeco.opencv.opencv_core.Mat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +13,6 @@ import utils.engine.EngineConstant;
 import utils.image.ImageUtils;
 import utils.image.TextListBox;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -247,22 +243,6 @@ public class TableText {
             }
         }
         return tableTextList;
-    }
-
-    /**
-     * bufferedimage to mat
-     * @param img
-     * @return
-     */
-    public Mat image2Mat(Image img) {
-        var bufferedImage = (BufferedImage) img.getWrappedImage();
-        var width = bufferedImage.getWidth();
-        var height = bufferedImage.getHeight();
-        byte[] data = ((DataBufferByte) bufferedImage.getRaster().getDataBuffer()).getData();
-        var mat = new Mat(height, width, opencv_core.CV_8UC3);
-        ByteIndexer byteIndexer = mat.createIndexer();
-        byteIndexer.put(0, 0, data);
-        return mat;
     }
 
 }
