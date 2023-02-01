@@ -72,8 +72,8 @@ public class OcrApp {
      * init ocr model
      */
     public void init() {
-        if(Optional.ofNullable(this.detectionModelPath).isEmpty() || Optional.ofNullable(this.recognitionModelPath).isEmpty()
-                || Optional.ofNullable(this.engineType).isEmpty()) {
+        if(Optional.ofNullable(this.detectionModelPath).isPresent() || Optional.ofNullable(this.recognitionModelPath).isPresent()
+                || Optional.ofNullable(this.engineType).isPresent()) {
             this.detection = new OcrDetection();
             this.recognition = new OcrRecognition();
             try {
@@ -90,7 +90,7 @@ public class OcrApp {
             }
             LOGGER.info("Init ocr model done!");
         } else {
-            LOGGER.info("Ocr model already exists! Does not need to be initialized!");
+            LOGGER.info("Please check whether 'detectionModelPath'、'recognitionModelPath' and 'engineType' exist!");
         }
     }
 
