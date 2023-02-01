@@ -220,5 +220,5 @@ AutoText 的授权协议为 **Apache License 2.0**，可免费用做商业用途
 
 ## Contribute
 
-欢迎有兴趣的朋友fork，提交PR。
+欢迎有兴趣的朋友fork，star，提交PR。
 
