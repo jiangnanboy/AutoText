@@ -5,7 +5,7 @@
 <br/><br/> 
 <p align="center">
   <a>
-    <img src="src/main/java/examples/ocr/output/ocr_result.png">
+    <img src="ocr_result.png">
   </a>
 </p>
 <br/><br/>
@@ -16,7 +16,7 @@
 <br/><br/> 
 <p align="center">
   <a>
-    <img src="src/main/java/examples/ocr/output/bordered_example_result.png">
+    <img src="bordered_example_result.png">
   </a>
 </p>
 <br/><br/>
@@ -24,7 +24,7 @@
 <br/><br/> 
 <p align="center">
   <a>
-    <img src="src/main/java/examples/ocr/output/unbordered_example_result.png">
+    <img src="unbordered_example_result.png">
   </a>
 </p>
 <br/><br/>
@@ -32,7 +32,7 @@
 <br/><br/> 
 <p align="center">
   <a>
-    <img src="src/main/java/examples/ocr/output/partially_example_result.png">
+    <img src="partially_example_result.png">
   </a>
 </p>
 <br/><br/>
