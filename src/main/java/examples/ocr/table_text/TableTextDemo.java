@@ -22,7 +22,21 @@ public class TableTextDemo {
     public static void main(String...args) throws IOException, TranslateException {
         String imagePath = "D:\\project\\idea_workspace\\AutoText\\src\\main\\java\\examples\\ocr\\img_test\\bordered_example.png";
         TableText tableText = new TableText();
-        List<TextListBox> listBoxes = tableText.TableTextRecog(imagePath);
+        /**
+         * maxSideLen:image resize
+         *
+         * borderType:{0:all, 1:bordered(default), 2:unbordered, 3:partiallybordered}
+         */
+        int maxSideLen = -1; // default, no resize
+        int borderType = 1; // default, bordered
+        List<TextListBox> listBoxes = tableText.tableTextRecog(imagePath);
+        for(TextListBox textListBox : listBoxes) {
+            System.out.print(textListBox);
+        }
+
+        maxSideLen = 1024; // image resize
+        borderType = 0; // all
+        listBoxes = tableText.tableTextRecog(imagePath,maxSideLen, borderType);
         for(TextListBox textListBox : listBoxes) {
             System.out.print(textListBox);
         }
