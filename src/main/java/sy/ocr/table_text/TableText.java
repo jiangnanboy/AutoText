@@ -6,6 +6,7 @@ import ai.djl.translate.TranslateException;
 import org.bytedeco.opencv.opencv_core.Mat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sy.ocr.table.rule.AllRecog;
 import sy.ocr.text.OcrApp;
 import utils.common.CollectionUtil;
 import utils.cv.NDArrayUtils;
@@ -89,7 +90,7 @@ public class TableText {
      * @return
      */
     public List<List<List<Integer>>> tableRecg(String imagePath) {
-        return tableRecg(imread(imagePath), 0);
+        return tableRecg(imread(imagePath), 1);
     }
 
     /**
@@ -98,13 +99,13 @@ public class TableText {
      * @return
      */
     public List<List<List<Integer>>> tableRecg(Mat imageMat) {
-        return tableRecg(imageMat, 0);
+        return tableRecg(imageMat, 1);
     }
 
     /**
      * table recognition
      * @param imageMat
-     * @param borderType {0:bordered (default), 1:unbordered, 2:partiallybordered}
+     * @param borderType {0:all, 1:bordered(default), 2:unbordered, 3:partiallybordered}
      * @return
      */
     public List<List<List<Integer>>> tableRecg(Mat imageMat, int borderType) {
@@ -112,22 +113,25 @@ public class TableText {
         List<List<List<Integer>>> resultList = null;
         switch (borderType) {
             case 0:
-                resultList = BorderedRecog.recognizeStructure(imageMat);
+                resultList = AllRecog.recognizeStructure(imageMat);
                 break;
             case 1:
-                resultList = UnBorderedRecog.recognizeStructure(imageMat);
+                resultList = BorderedRecog.recognizeStructure(imageMat);
                 break;
             case 2:
+                resultList = UnBorderedRecog.recognizeStructure(imageMat);
+                break;
+            case 3:
                 resultList = PartiallyBorderedRecog.recognizeStructure(imageMat);
                 break;
             default:
-                LOGGER.error("Please check 'borderType' in '[0->bordered ,1->unbordered ,2->partiallybordered]' !");
+                LOGGER.error("Please check 'borderType' in '[0->all, 1->bordered(default), 2->unbordered, 3->partiallybordered]' !");
         }
         return resultList;
     }
 
-    public List<TextListBox> TableTextRecog(Image image) throws IOException, TranslateException {
-        return this.TableTextRecog(image, -1);
+    public List<TextListBox> tableTextRecog(Image image) throws IOException, TranslateException {
+        return this.tableTextRecog(image, -1, 1);
     }
 
     /**
@@ -137,20 +141,20 @@ public class TableText {
      * @throws IOException
      * @throws TranslateException
      */
-    public List<TextListBox> TableTextRecog(Image image, int maxSideLen) throws IOException, TranslateException {
+    public List<TextListBox> tableTextRecog(Image image, int maxSideLen, int borderType) throws IOException, TranslateException {
         if(-1 != maxSideLen) {
             image = ImageUtils.imageResize(image, maxSideLen);
         }
         List<TextListBox> textList = this.textOcr(image);
         var mat = NDArrayUtils.image2Mat2(image);
-        List<List<List<Integer>>> tableList = this.tableRecg(mat);
+        List<List<List<Integer>>> tableList = this.tableRecg(mat, borderType);
         List<TextListBox> resultList = this.getTableTextResult(textList, tableList);
         return resultList;
 
     }
 
-    public List<TextListBox> TableTextRecog(String imagePath) throws IOException, TranslateException {
-        return this.TableTextRecog(imagePath, -1);
+    public List<TextListBox> tableTextRecog(String imagePath) throws IOException, TranslateException {
+        return this.tableTextRecog(imagePath, -1, 1);
     }
 
     /**
@@ -160,7 +164,7 @@ public class TableText {
      * @throws IOException
      * @throws TranslateException
      */
-    public List<TextListBox> TableTextRecog(String imagePath, int maxSideLen) throws IOException, TranslateException {
+    public List<TextListBox> tableTextRecog(String imagePath, int maxSideLen, int borderType) throws IOException, TranslateException {
         var imageFile = Paths.get(imagePath);
         var image = ImageFactory.getInstance().fromFile(imageFile);
         if(-1 != maxSideLen) {
@@ -168,7 +172,7 @@ public class TableText {
         }
         List<TextListBox> textList = this.textOcr(image);
         var mat = NDArrayUtils.image2Mat2(image);
-        List<List<List<Integer>>> tableList = this.tableRecg(mat);
+        List<List<List<Integer>>> tableList = this.tableRecg(mat, borderType);
         List<TextListBox> resultList = this.getTableTextResult(textList, tableList);
         return resultList;
     }
