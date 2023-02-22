@@ -28,9 +28,75 @@ The main functions of this project include text error correction, picture ocr an
 - The text error correction section is detailed here [jcorrector](https://github.com/jiangnanboy/jcorrector)
 - This project mainly includes:
     - error correction based on ngram
+        ```
+          Corrector corrector = new Corrector();
+          String sentence = “少先队员因该为老人让坐”;
+          System.out.println(corrector.correct(sentence));
+        ```
     - error correction based on deep learning
+        ```
+          LoadModel.loadOnnxModel();
+          String text = "今天新情很好。";
+          text = "你找到你最喜欢的工作，我也很高心。";
+          text = "是的，当线程不再使用时，该缓冲区将被清理（我昨天实际上对此进行了测试，我可以每5ms发送一个新线程，而不会产生净内存累积，并确认它的rng内存已在gc上清理）。编号7788";
+          text = text.toLowerCase();
+          BertTokenizer tokenizer = new BertTokenizer();
+          MacBert macBert = new MacBert(tokenizer);
+          Map<String, OnnxTensor> inputTensor = null;
+          try {
+              inputTensor = macBert.parseInputText(text);
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+          List<String> predTokenList = macBert.predCSC(inputTensor);
+          predTokenList = predTokenList.stream().map(token -> token.replace("##", "")).collect(Collectors.toList());
+          String predString = String.join("", predTokenList);
+          System.out.println(predString);
+          List<Pair<String, String>> resultList = macBert.getErrors(predString, text);
+          for(Pair<String, String> result : resultList) {
+              System.out.println(text + " => " + result.getLeft() + " " + result.getRight());
+          }
+        ```
     - error correction based on template Chinese grammar 
+        ```
+         String templatePath = GecDemo.class.getClassLoader().getResource(PropertiesReader.get("template")).getPath().replaceFirst("/", "");
+         GecCheck gecRun = new GecCheck();
+         gecRun.init(templatePath);
+         String sentence = "爸爸看完小品后忍俊不禁笑了起来。";
+         String infoStr = gecRun.checkCorrect(sentence);
+         if(StringUtils.isNotBlank(infoStr)) {
+             System.out.println(infoStr);
+         }
+        ```
     - error correction based on idiom、proper name
+        ```
+         String properNamePath = ProperDemo.class.getClassLoader().getResource(PropertiesReader.get("proper_name_path")).getPath().replaceFirst("/", "");
+         String strokePath = ProperDemo.class.getClassLoader().getResource(PropertiesReader.get("stroke_path")).getPath().replaceFirst("/", "");;
+         ProperCorrector properCorrector = new ProperCorrector(properNamePath, strokePath);
+         List<String> testLine = List.of(
+                 "报应接中迩来",
+                 "这块名表带带相传",
+                 "这块名表代代相传",
+                 "他贰话不说把牛奶喝完了",
+                 "这场比赛我甘败下风",
+                 "这场比赛我甘拜下封",
+                 "这家伙还蛮格尽职守的",
+                 "报应接中迩来",  // 接踵而来
+                 "人群穿流不息",
+                 "这个消息不径而走",
+                 "这个消息不胫儿走",
+                 "眼前的场景美仑美幻简直超出了人类的想象",
+                 "看着这两个人谈笑风声我心理不由有些忌妒",
+                 "有了这一番旁证博引",
+                 "有了这一番旁针博引",
+                 "这群鸟儿迁洗到远方去了",
+                 "这群鸟儿千禧到远方去了",
+                 "美国前总统特琅普给普京点了一个赞，特朗普称普金做了一个果断的决定"
+         );
+         for(String line : testLine) {
+             System.out.println(properCorrector.correct(line));
+         }
+        ```
 - See the examples/correct section of this project for specific use
 
 ## OCR
