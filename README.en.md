@@ -16,6 +16,7 @@ The main functions of this project include text error correction, picture ocr an
 
 - [Text-Error-Correction](#Text-Error-Correction)
 - [OCR](#OCR)
+- [Layout-Detection](#Layout-Detection)
 - [Table-Structure-Recognition](#Table-Structure-Recognition)
 - [Todo](#Todo)
 - [Contact](#Contact)
