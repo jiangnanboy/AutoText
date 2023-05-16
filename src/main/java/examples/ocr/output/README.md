@@ -10,6 +10,17 @@
 </p>
 <br/><br/>
 
+## layout detection
+- 结果展示
+
+<br/><br/> 
+<p align="center">
+  <a>
+    <img src="layout_img_result.jpg">
+  </a>
+</p>
+<br/><br/>
+
 ## 表格结构识别
 - 结果展示
 
