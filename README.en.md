@@ -322,7 +322,8 @@ The main functions of this project include text error correction, picture ocr an
 - [x] Based on the paddleocr model, image ocr is implemented using java
 - [x] Use opencv to identify table structures based on rules
 - [x] Integrate form recognition and OCR recognition
-
+- [x] Add layout detection analysis
+      
 ...
 
 ## Contact
