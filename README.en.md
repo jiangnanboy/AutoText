@@ -145,6 +145,62 @@ The main functions of this project include text error correction, picture ocr an
 ```
 - Result display[OCR](src/main/java/examples/ocr/output/README.md)
 
+## Layout-Detection
+- Developed by yolov8, [layout_analysis4j](https://github.com/jiangnanboy/layout_analysis4j)
+- See the examples/ocr/layout_detection/LayoutDetection section of this project for specific use
+- Usage
+``` java
+    public static void main(String...args) {
+                String modelPath = LayoutDetection.class.getClassLoader().getResource(PropertiesReader.get("model_path")).getPath().replaceFirst("/", "");
+                String labelPath = LayoutDetection.class.getClassLoader().getResource(PropertiesReader.get("table_det_labels_path")).getPath().replaceFirst("/", "");
+                String imgPath = "D:\\project\\idea_workspace\\layout_analysis4j\\img\\test.webp";
+        
+                try {
+                    LayoutDet modelDet = new LayoutDet(modelPath, labelPath);
+                    Mat img = Imgcodecs.imread(imgPath);
+                    if (img.dataAddr() == 0) {
+                        System.out.println("Could not open image: " + imgPath);
+                        System.exit(1);
+                    }
+                    // run detection
+                    try {
+                        List<Detection> detectionList = modelDet.detectObjects(img);
+        
+                        LayoutDetectionUtil.drawPredictions(img, detectionList);
+                        System.out.println(JSON.toJSONString(detectionList));
+                        Imgcodecs.imwrite("D:\\project\\idea_workspace\\layout_analysis4j\\img\\prediction.jpg", img);
+                    } catch (OrtException ortException) {
+                        ortException.printStackTrace();
+                    }
+        
+                } catch (OrtException e) {
+                    e.printStackTrace();
+                }
+            }
+```
+- Result
+         
+```
+    [{"bbox":[137.88228,40.05045,352.5302,60.206684],"confidence":0.9228547,"label":"Header","labelIndex":0},
+    {"bbox":[25.661982,52.15992,80.54977,60.164627],"confidence":0.8484751,"label":"Header","labelIndex":0},
+    {"bbox":[400.68176,50.069782,462.38123,58.523815],"confidence":0.83252084,"label":"Header","labelIndex":0},
+    {"bbox":[27.056168,478.51273,205.72672,656.39886],"confidence":0.9614719,"label":"Text","labelIndex":1},
+    {"bbox":[25.820251,304.84778,463.41486,386.2965],"confidence":0.89359975,"label":"Text","labelIndex":1},
+    {"bbox":[21.327255,190.66518,463.8985,257.07446],"confidence":0.8879021,"label":"Text","labelIndex":1},
+    {"bbox":[182.88458,142.3864,308.64737,156.58653],"confidence":0.79081506,"label":"Text","labelIndex":1},
+    {"bbox":[38.471603,435.21515,463.1955,474.5235],"confidence":0.77674204,"label":"Text","labelIndex":1},
+    {"bbox":[153.92957,160.85332,338.4781,168.90303],"confidence":0.764402,"label":"Text","labelIndex":1},
+    {"bbox":[27.318249,661.32355,151.53812,670.04987],"confidence":0.3412643,"label":"Text","labelIndex":1},
+    {"bbox":[306.27896,667.1539,362.94162,674.0262],"confidence":0.8710417,"label":"Figure caption","labelIndex":3},
+    {"bbox":[213.9415,479.61642,468.25687,661.9558],"confidence":0.9372132,"label":"Figure","labelIndex":4},
+    {"bbox":[26.771957,405.50818,94.59786,416.935],"confidence":0.91822684,"label":"Title","labelIndex":7},
+    {"bbox":[131.77039,103.47922,359.43063,120.83272],"confidence":0.88686645,"label":"Title","labelIndex":7},
+    {"bbox":[26.655102,661.2926,151.92046,670.0917],"confidence":0.87808716,"label":"Title","labelIndex":7},
+    {"bbox":[27.927279,275.91486,68.040955,287.49615],"confidence":0.8072859,"label":"Title","labelIndex":7},
+    {"bbox":[27.4192,661.2635,151.4754,670.21075],"confidence":0.49235547,"label":"Footer","labelIndex":8}]
+```
+- Result display[Layout-Detection](src/main/java/examples/ocr/output/README.md)
+
 ## Table-Structure-Recognition
 - Developed by opencv based on rules, the main table types identified are: bounded table, unbounded table and partially bounded table
 - See the examples/ocr/table/TableDemo section of this project for specific use
