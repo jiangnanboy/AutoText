@@ -1,5 +1,7 @@
 package utils.cv;
 
+import org.bytedeco.javacv.Java2DFrameConverter;
+import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.bytedeco.opencv.global.opencv_imgproc;
 import org.bytedeco.opencv.opencv_core.Mat;
 import org.bytedeco.opencv.opencv_core.Point2f;
@@ -78,6 +80,11 @@ public class OpenCVUtils {
         org.opencv.core.Mat mat = new org.opencv.core.Mat(height, width, CvType.CV_8UC3);
         mat.put(0, 0, data);
         return mat;
+    }
+
+    public static org.bytedeco.opencv.opencv_core.Mat bufferedImageToMat(BufferedImage bi) {
+        OpenCVFrameConverter.ToMat cv = new OpenCVFrameConverter.ToMat();
+        return cv.convertToMat(new Java2DFrameConverter().convert(bi));
     }
 
 }
